@@ -171,29 +171,18 @@ public class Keyboard {
                 else if(keyCode == 35)  //Joystick RIGHT
                     vm.setRightJoystick(0xFD);
                 else if(keyCode == 34)  //Joystick DOWN
-                    vm.setRightJoystick(0xFB);
-                
-                //System.out.println("THE KEY is: " + keyCode);
-                //keyCode = 0;       
+                    vm.setRightJoystick(0xFB);  
             }
         });
     }
     
     public boolean isKeyboardActivated()
     {
-        //System.out.printf("Port 12: %1$02Xh   -   ", cpu.getPort1());
-        //System.out.print((cpu.getPort1() & 0x02) == 0x02);
-        //int x = cpu.getPort1();
-        //System.out.println((cpu.isBitTrue(cpu.getPort1(), 2)));
-        //is Bit 2 from Port2 True        
-        //if((cpu.getPort1() & 0x02) == 0x02)
-        
         //Negativlogik (!P12)
         if(cpu.isBitTrue(cpu.getPort1(), 2))
             return false;
         else 
             return true;
-
     }
     
     public boolean isPressedKeyPending()
@@ -217,140 +206,3 @@ public class Keyboard {
         pressedKeyPending = false;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*
-    private int decoder (int in)
-    {
-        //in = Strobe, C, B, A
-        int out;
-     
-        switch (in)
-        {
-            case 0x0:
-                //out = 0x7F; //0; 0111 1111
-                out = 0;
-                break;
-            case 0x2:
-                //out = 0xBF; //1; 1011 1111
-                out = 1;
-                break;
-            case 0x4:
-                //out = 0xDF; //2; 1101 1111
-                out = 2;
-                break;
-            case 0x6:
-                //out = 0xEF; //3; 1110 1111
-                out = 3;
-                break;
-            case 0x8:
-                //out = 0xF7; //4; 1111 0111
-                out = 4;
-                break;
-            case 0xA:
-                //out = 0xFB; //5; 1111 1011
-                out = 5;
-                break;
-             // wird nicht benötigt
-             //case 0xC:
-             //   out = 0xFD; //1111 1101
-             //   break;
-             //case 0xE:
-             //   out = 0xFE; //1111 1110
-             //   break;
-             //
-            default:
-                out = 0xFF; //1111 1111
-        }
-        return out;
-    }
-     
-    private int keyboard(String key, int column)
-    {
-        int out = 0xf;
-        //System.out.printf("decoder_output: %1$02x\n", column);
-        //System.out.println("KEY: " + key);
-        //System.out.printf("column: %1$02x\n ", column);
-        if(column != 0xFF)
-            {
-            for(int row = 0; row <= 7; row++)
-            {
-                if(key == keyboard[row][column])
-                {
-                    out = column;
-                    System.out.println(keyboard[row][column] + " " + row + ":" + column);
-                    //System.out.printf()
-                }
-            }
-        }
-        return out;
-    }
-     
-    private int encoder(int in)
-    {
-        int out;
-        switch (in)
-        {
-            case 0:
-                out = 0xE;
-                break;
-            case 1:
-                out = 0xC;
-                break;
-            case 2:
-                out = 0xA;
-                break;
-            case 3:
-                out = 0x8;
-                break;
-            case 4:
-                out = 0x6;
-                break;
-            case 5:
-                out = 0x4;
-                break;
-            case 6:
-                out = 0x2;
-                break;
-            case 7:
-                out = 0x0;
-            default:
-                out = 0xf;
-        }
-        return out << 4;
-    }
-    int getOutput(String key, int in)
-    {
-        int decoder_output = decoder(in);
-        //System.out.printf("decoder_output: %1$01x\n", decoder_output);
-        int keyboard_output = keyboard(key, decoder_output);
-        //System.out.printf("keyboard_output: %1$01x\n", keyboard_output);
-        int encoder_output = encoder(keyboard_output);
-        //System.out.printf("encoder_output: %1$01x\n\n", encoder_output);
-        return encoder_output;
-    }
-     */
